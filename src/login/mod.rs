@@ -3,7 +3,31 @@
 use openssl::hash::{MessageDigest, hash};
 use reqwest::Method;
 use serde_json::{Value, json};
-use crate::request::{request, CRYPTO_WEAPI, USER_AGENT_PC};
+use crate::request::{request, CRYPTO_WEAPI, USER_AGENT_PC, CACHE_PATH, CACHE_CSRF_TOKEN_KEY, CACHE_TOKEN_KEY};
+
+/// 通过token登录
+/// 
+/// # 参数:
+/// - token: cookie中的MUSIC_U值
+/// - csrf_token: cookie中的_csrf值
+pub async fn login_by_token(csrf_token: &str, token: &str) -> Result<Value, Box<dyn std::error::Error>> {
+   
+    cacache::write(CACHE_PATH, CACHE_TOKEN_KEY, token).await?;
+    cacache::write(CACHE_PATH, CACHE_CSRF_TOKEN_KEY, csrf_token).await?;
+    
+    let url = "https://music.163.com/weapi/w/nuser/account/get";
+
+    let data = json!({});
+
+    let option = json!({
+        "crypto": CRYPTO_WEAPI,
+        "ua": USER_AGENT_PC,
+        "cookie": {
+        }
+    });
+
+    request(Method::POST, url, data, option).await
+}
 
 /// 网易邮箱登录
 /// 

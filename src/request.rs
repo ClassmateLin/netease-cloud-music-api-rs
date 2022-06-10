@@ -3,7 +3,7 @@ use regex::Regex;
 use serde_json::{Value, Map};
 use reqwest::Method;
 use crate::crypto::Crypto;
-const CACHE_PATH:&str = "./.ncm_cache";
+pub const CACHE_PATH:&str = "./.ncm_cache";
 pub const USER_AGENT_PC:&str =  "PC";
 pub const USER_AGENT_MOBILE: &str = "Mobile";
 pub const CACHE_CSRF_TOKEN_KEY: &str = "LOGIN_CSRF_TOKEN";

@@ -1,6 +1,7 @@
-# netease-cloud-music-api-rs
+# ncm_api
 
 Rust语言版本的网易云API.
+
 
 ## 配置
 
@@ -28,3 +29,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
+
+## 文档
+
+[ncm_api](https://docs.rs/ncm_api/0.1.1/ncm_api/)
